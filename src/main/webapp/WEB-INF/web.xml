@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0" metadata-complete="true">
+  <display-name>CRUD Category JPA</display-name>
+  <request-character-encoding>UTF-8</request-character-encoding>
+  <response-character-encoding>UTF-8</response-character-encoding>
+  <filter><filter-name>web</filter-name><filter-class>vn.iotstar.web.WebFilter</filter-class></filter>
+  <filter-mapping><filter-name>web</filter-name><url-pattern>/*</url-pattern></filter-mapping>
+  <filter><filter-name>auth</filter-name><filter-class>vn.iotstar.web.AuthFilter</filter-class></filter>
+  <filter-mapping><filter-name>auth</filter-name><url-pattern>/*</url-pattern></filter-mapping>
+  <filter><filter-name>sitemesh</filter-name><filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class></filter>
+  <filter-mapping><filter-name>sitemesh</filter-name><url-pattern>/*</url-pattern><dispatcher>REQUEST</dispatcher></filter-mapping>
+  <servlet><servlet-name>profile</servlet-name><servlet-class>vn.iotstar.controller.ProfileController</servlet-class><multipart-config><max-file-size>2097152</max-file-size><max-request-size>3145728</max-request-size></multipart-config></servlet>
+  <servlet-mapping><servlet-name>profile</servlet-name><url-pattern>/profile</url-pattern><url-pattern>/profile/update</url-pattern><url-pattern>/profile/email/request</url-pattern><url-pattern>/profile/email/confirm</url-pattern><url-pattern>/profile/email/cancel</url-pattern></servlet-mapping>
+  <listener><listener-class>vn.iotstar.config.AppListener</listener-class></listener>
+  <servlet><servlet-name>category</servlet-name><servlet-class>vn.iotstar.controller.CategoryController</servlet-class>
+    <multipart-config><max-file-size>2097152</max-file-size><max-request-size>3145728</max-request-size><file-size-threshold>0</file-size-threshold></multipart-config>
+  </servlet>
+  <servlet-mapping><servlet-name>category</servlet-name><url-pattern>/admin/categories</url-pattern><url-pattern>/admin/category/add</url-pattern><url-pattern>/admin/category/insert</url-pattern><url-pattern>/admin/category/edit</url-pattern><url-pattern>/admin/category/update</url-pattern><url-pattern>/admin/category/delete</url-pattern></servlet-mapping>
+  <servlet><servlet-name>image</servlet-name><servlet-class>vn.iotstar.controller.ImageController</servlet-class></servlet>
+  <servlet-mapping><servlet-name>image</servlet-name><url-pattern>/image</url-pattern></servlet-mapping>
+  <session-config><session-timeout>30</session-timeout><cookie-config><http-only>true</http-only></cookie-config></session-config>
+  <welcome-file-list><welcome-file>index.jsp</welcome-file></welcome-file-list>
+  <servlet><servlet-name>accounts</servlet-name><servlet-class>vn.iotstar.controller.AuthController</servlet-class></servlet>
+  <servlet-mapping><servlet-name>accounts</servlet-name><url-pattern>/register</url-pattern><url-pattern>/activate</url-pattern><url-pattern>/login</url-pattern><url-pattern>/logout</url-pattern><url-pattern>/forgot-password</url-pattern><url-pattern>/reset-password</url-pattern><url-pattern>/otp/resend</url-pattern></servlet-mapping>
+  <servlet><servlet-name>videos</servlet-name><servlet-class>vn.iotstar.controller.VideoController</servlet-class><multipart-config><file-size-threshold>1048576</file-size-threshold><max-file-size>104857600</max-file-size><max-request-size>107000000</max-request-size></multipart-config></servlet>
+  <servlet-mapping><servlet-name>videos</servlet-name><url-pattern>/home</url-pattern><url-pattern>/video</url-pattern><url-pattern>/video/add</url-pattern><url-pattern>/video/edit</url-pattern><url-pattern>/video/detail</url-pattern><url-pattern>/video/insert</url-pattern><url-pattern>/video/update</url-pattern><url-pattern>/video/delete</url-pattern><url-pattern>/upload-demo</url-pattern><url-pattern>/multiPartServlet</url-pattern></servlet-mapping>
+  <servlet><servlet-name>demoMail</servlet-name><servlet-class>vn.iotstar.controller.DemoMailController</servlet-class></servlet>
+  <servlet-mapping><servlet-name>demoMail</servlet-name><url-pattern>/demo/mail</url-pattern></servlet-mapping>
+  <servlet><servlet-name>media</servlet-name><servlet-class>vn.iotstar.controller.MediaController</servlet-class></servlet>
+  <servlet-mapping><servlet-name>media</servlet-name><url-pattern>/media/video</url-pattern></servlet-mapping>
+  <mime-mapping><extension>ttf</extension><mime-type>font/ttf</mime-type></mime-mapping>
+</web-app>

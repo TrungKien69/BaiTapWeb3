@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh><dispatch-mode>include</dispatch-mode><mapping path="/*" decorator="bootstrap.jsp"/>
+<mapping path="/assets/*" exclude="true"/><mapping path="/image" exclude="true"/><mapping path="/media/*" exclude="true"/></sitemesh>

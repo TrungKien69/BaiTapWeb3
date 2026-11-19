@@ -1,0 +1,9 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<!doctype html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VideoHub · Hồ sơ và video</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style.css?v=profile4">
+<sitemesh:write property="head"/></head><body data-layout="sitemesh-bootstrap">
+<header><div class="container masthead"><a class="brand" href="${pageContext.request.contextPath}/home">Video<span>Hub</span></a><nav class="mainnav" aria-label="Điều hướng"><a href="${pageContext.request.contextPath}/home">Trang chủ</a><c:choose><c:when test="${not empty currentUser}"><a href="${pageContext.request.contextPath}/video">Video của tôi</a><a href="${pageContext.request.contextPath}/admin/categories">Danh mục</a><a href="${pageContext.request.contextPath}/upload-demo">Upload Multipart</a><a href="${pageContext.request.contextPath}/profile">Hồ sơ</a><span class="navuser"><c:out value="${currentUser.username}"/></span><form method="post" action="${pageContext.request.contextPath}/logout"><input type="hidden" name="csrf" value="${sessionScope.csrf}"><button class="secondary compact" type="submit">Đăng xuất</button></form></c:when><c:otherwise><a href="${pageContext.request.contextPath}/login">Đăng nhập</a><a class="button compact" href="${pageContext.request.contextPath}/register">Đăng ký</a></c:otherwise></c:choose></nav></div></header><main class="container py-4">
+<sitemesh:write property="body"/></main><footer class="container border-top py-3">VideoHub · Tài khoản, hồ sơ và video</footer>
+<script src="${pageContext.request.contextPath}/assets/validation.js" defer></script></body></html>

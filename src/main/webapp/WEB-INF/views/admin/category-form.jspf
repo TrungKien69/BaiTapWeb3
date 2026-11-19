@@ -1,0 +1,16 @@
+<%@ page pageEncoding="UTF-8" %>
+<a class="back" href="${pageContext.request.contextPath}/admin/categories">← Danh sách danh mục</a>
+<div class="pagehead"><div><p class="eyebrow">${edit ? 'CẬP NHẬT' : 'TẠO MỚI'}</p><h1>${edit ? 'Sửa danh mục' : 'Thêm danh mục'}</h1><p class="muted">Nhập tên, chọn trạng thái và thêm hình ảnh nếu cần.</p></div></div>
+<c:if test="${not empty error}"><p class="notice error" role="alert"><c:out value="${error}"/></p></c:if>
+<form class="panel editor" action="${pageContext.request.contextPath}/admin/category/${edit ? 'update' : 'insert'}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf" value="${sessionScope.csrf}"><c:if test="${edit}"><input type="hidden" name="categoryid" value="${cate.categoryid}"></c:if>
+<label for="categoryname">Tên danh mục <span class="required">*</span></label><input id="categoryname" name="categoryname" maxlength="50" required value="${fn:escapeXml(cate.categoryname)}" placeholder="Ví dụ: Điện thoại"><small>Tối đa 50 ký tự, không trùng với danh mục khác.</small>
+<label for="images">Link hình ảnh</label><input type="url" id="images" name="images" maxlength="500" placeholder="https://example.com/image.jpg" value="${fn:startsWith(cate.images, 'http') ? fn:escapeXml(cate.images) : ''}">
+<label for="images1">Hoặc tải ảnh từ máy</label><input type="file" id="images1" name="images1" accept="image/png,image/jpeg,image/gif,image/webp"><small>PNG, JPG, GIF, WebP · tối đa 2 MB. Ảnh tải lên được ưu tiên hơn link.</small>
+<c:if test="${not empty cate.images}">
+<c:choose><c:when test="${fn:startsWith(cate.images, 'http')}"><c:set var="imgUrl" value="${cate.images}"/></c:when><c:otherwise><c:url var="imgUrl" value="/image"><c:param name="fname" value="${cate.images}"/></c:url></c:otherwise></c:choose>
+<div class="preview"><img src="${fn:escapeXml(imgUrl)}" alt="Ảnh hiện tại" referrerpolicy="no-referrer"><label><input type="checkbox" name="removeImage" value="1"> Xóa ảnh hiện tại</label></div>
+</c:if>
+<fieldset><legend>Trạng thái</legend><label class="radio"><input type="radio" name="status" value="1" ${cate.status == 1 ? 'checked' : ''} required> Hoạt động</label><label class="radio"><input type="radio" name="status" value="0" ${cate.status == 0 ? 'checked' : ''}> Khóa</label></fieldset>
+<div class="formactions"><button type="submit">${edit ? 'Lưu thay đổi' : 'Thêm danh mục'}</button><a class="secondary" href="${pageContext.request.contextPath}/admin/categories">Hủy</a></div>
+</form>
